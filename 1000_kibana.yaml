@@ -8,12 +8,11 @@ metadata:
 data:
   kibana.yml: |-
     server.host: 0.0.0.0
-    server.shutdownTimeout: "5s"
     monitoring.ui.container.elasticsearch.enabled: true
     elasticsearch:
       hosts: ${ELASTICSEARCH_HOSTS}
-      username: ${ELASTICSEARCH_USER}
-      password: ${ELASTICSEARCH_PASSWORD}
+      username: ${KIBANA_USER}
+      password: ${KIBANA_PASSWORD}
 ---
 apiVersion: v1
 kind: Service
@@ -55,12 +54,12 @@ spec:
         env:
         - name: ELASTICSEARCH_HOSTS
           value: "http://elasticsearch-ingest.default.svc.cluster.local:9200"
-        - name: ELASTICSEARCH_USER
-          value: "elastic"
-        - name: ELASTICSEARCH_PASSWORD
+        - name: KIBANA_USER
+          value: "kibana_system"
+        - name: KIBANA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: elasticsearch-pw-elastic
+              name: kibana-system-pw
               key: password
         volumeMounts:
         - name: config
@@ -69,8 +68,8 @@ spec:
           subPath: kibana.yml
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "800m"
+            memory: "1024Mi"
+            cpu: "1000m"
       volumes:
       - name: config
         configMap:
