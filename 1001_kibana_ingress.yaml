@@ -2,17 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kibana-ingress
-  labels:
-    name: kibana-ingress
 spec:
   rules:
   - host: ux360.izzi.mx
     http:
       paths:
-      - pathType: Prefix
-        path: "/kibana"
+      - path: "/"
+        pathType: Prefix
         backend:
           service:
             name: kibana-service
-            port: 
+            port:
               number: 5601
