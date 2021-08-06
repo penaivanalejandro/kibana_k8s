@@ -9,6 +9,7 @@ data:
   kibana.yml: |-
     server.host: 0.0.0.0
     monitoring.ui.container.elasticsearch.enabled: true
+    server.publicBaseUrl: "http://ux360.izzi.mx"
     elasticsearch:
       hosts: ${ELASTICSEARCH_HOSTS}
       username: ${KIBANA_USER}
