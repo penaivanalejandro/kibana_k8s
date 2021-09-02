@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: kibana
-        image: docker.elastic.co/kibana/kibana:7.14.0
+        image: docker.elastic.co/kibana/kibana:7.14.1
         ports:
         - containerPort: 5601
           name: webinterface
@@ -69,8 +69,8 @@ spec:
           subPath: kibana.yml
         resources:
           limits:
-            memory: "1024Mi"
-            cpu: "1000m"
+            memory: "2048Mi"
+            cpu: "1500m"
       volumes:
       - name: config
         configMap:
